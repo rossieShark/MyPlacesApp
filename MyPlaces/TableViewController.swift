@@ -34,13 +34,14 @@ class TableViewController: UITableViewController {
     
         // обязательный метод. Работаем над конфигурацией ячейки.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = restaurantNames[indexPath.row]
+        //Приведение объекта Cell к классу as
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
+        cell.nameLabel?.text = restaurantNames[indexPath.row]
         // indexPath.row - возвращает целочисленное значение, равное индексу строки
         // присваеваем ячейке изображение.
-        cell.imageView?.image = UIImage(named: restaurantNames[indexPath.row])
-        cell.imageView?.layer.cornerRadius = cell.frame.size.height / 2 //закругление ImageView
-        cell.imageView?.clipsToBounds = true //обрезка изображения
+        cell.imageOfPlace?.image = UIImage(named: restaurantNames[indexPath.row])
+        cell.imageOfPlace?.layer.cornerRadius = cell.imageOfPlace.frame.height / 2 //закругление ImageView
+        cell.imageOfPlace?.clipsToBounds = true //обрезка изображения
         return cell
     }
    
