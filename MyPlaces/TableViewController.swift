@@ -39,9 +39,17 @@ class TableViewController: UITableViewController {
         // indexPath.row - возвращает целочисленное значение, равное индексу строки
         // присваеваем ячейке изображение.
         cell.imageView?.image = UIImage(named: restaurantNames[indexPath.row])
+        cell.imageView?.layer.cornerRadius = cell.frame.size.height / 2 //закругление ImageView
+        cell.imageView?.clipsToBounds = true //обрезка изображения
         return cell
     }
    
+    
+    //MARK: - Table View Delegate
+        // высота ячейки
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            return 85
+        }
 
  
     // MARK: - Navigation
