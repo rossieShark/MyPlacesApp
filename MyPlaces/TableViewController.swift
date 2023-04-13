@@ -9,7 +9,9 @@ import UIKit
 
 class TableViewController: UITableViewController {
     
-    var restaurantNames = ["Alaverdi", "Kiziki", "Tavaduri", "Chacha time", "Provence Cafe", "Place Batumi", "Bericoni", "Mary's Irish Pub"]
+    //var restaurantNames = ["Alaverdi", "Kiziki", "Tavaduri", "Chacha time", "Provence Cafe", "Place Batumi", "Bericoni", "Mary's Irish Pub"]
+    
+    var places = Place.getPlaces()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +30,7 @@ class TableViewController: UITableViewController {
     
     //обязательный метод, возвращает количество ячеек (может быть 0)
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return restaurantNames.count
+        return places.count
     }
     
     
@@ -36,22 +38,38 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //Приведение объекта Cell к классу as
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
-        cell.nameLabel?.text = restaurantNames[indexPath.row]
+        
+        let place = places[indexPath.row]
+        
+        cell.nameLabel.text = place.name
+        cell.locationLabel.text = place.location
+        cell.typeLabel.text = place.type
+        
+        
+            // В случае, если пользователь не загрузил изображение места, реализуем метод, который вставляет изображение по дефолту
+        if place.image == nil {
+            // присваеваем ячейке изображение.
+            cell.imageOfPlace?.image = UIImage(named: place.restaurantImage!)
+        } else {
+            cell.imageOfPlace.image = place.image
+        }
         // indexPath.row - возвращает целочисленное значение, равное индексу строки
         // присваеваем ячейке изображение.
-        cell.imageOfPlace?.image = UIImage(named: restaurantNames[indexPath.row])
-        cell.imageOfPlace?.layer.cornerRadius = cell.imageOfPlace.frame.height / 2 //закругление ImageView
+        
+        //работа с изображением
+        cell.imageOfPlace?.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2 //закругление ImageView
         cell.imageOfPlace?.clipsToBounds = true //обрезка изображения
         return cell
     }
    
     
     //MARK: - Table View Delegate
-        // высота ячейки
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    /*
+         //высота ячейки
+   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             return 85
         }
-
+*/
  
     // MARK: - Navigation
         /*
@@ -62,4 +80,15 @@ class TableViewController: UITableViewController {
     }
     */
 
+    //  save button activation
+    @IBAction func unWingSegue(_ segue: UIStoryboardSegue) {
+        //создаем экземпляр класса Place
+        // возврат осуществляется через unwindSegue, source
+        guard let newPlaceVC = segue.source as? NewPlaceViewController else { return }
+        
+        newPlaceVC.saveNewPlace()
+        places.append(newPlaceVC.newPlace!)
+        // обновление интерфейса
+        tableView.reloadData()
+    }
 }
