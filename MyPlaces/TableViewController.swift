@@ -6,15 +6,22 @@
 //
 
 import UIKit
+import RealmSwift
 
 class TableViewController: UITableViewController {
     
     //var restaurantNames = ["Alaverdi", "Kiziki", "Tavaduri", "Chacha time", "Provence Cafe", "Place Batumi", "Bericoni", "Mary's Irish Pub"]
     
-    var places = Place.getPlaces()
+    // var places = Place.getPlaces()
+    
+    //Results - это автообновляемый тип контейнера, который возвращает запрашиваемы объекты ( в текущем потоке)
+    var places: Results<Place>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Отоборажение элементов на экране
+        places = realm.objects(Place.self)
         
         
     }
@@ -30,7 +37,7 @@ class TableViewController: UITableViewController {
     
     //обязательный метод, возвращает количество ячеек (может быть 0)
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return places.count
+        return places.isEmpty ? 0 : places.count
     }
     
     
@@ -44,8 +51,8 @@ class TableViewController: UITableViewController {
         cell.nameLabel.text = place.name
         cell.locationLabel.text = place.location
         cell.typeLabel.text = place.type
-        
-        
+        cell.imageOfPlace.image = UIImage(data: place.imageData!)
+        /*
             // В случае, если пользователь не загрузил изображение места, реализуем метод, который вставляет изображение по дефолту
         if place.image == nil {
             // присваеваем ячейке изображение.
@@ -53,11 +60,15 @@ class TableViewController: UITableViewController {
         } else {
             cell.imageOfPlace.image = place.image
         }
+         */
+        //  В случае с работой базой дынных, изображение не может быть nil.
+        
+        
         // indexPath.row - возвращает целочисленное значение, равное индексу строки
         // присваеваем ячейке изображение.
         
         //работа с изображением
-        cell.imageOfPlace?.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2 //закругление ImageView
+        cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2 //закругление ImageView
         cell.imageOfPlace?.clipsToBounds = true //обрезка изображения
         return cell
     }
@@ -87,7 +98,9 @@ class TableViewController: UITableViewController {
         guard let newPlaceVC = segue.source as? NewPlaceViewController else { return }
         
         newPlaceVC.saveNewPlace()
-        places.append(newPlaceVC.newPlace!)
+        
+        //Новые объекты сейчас сразу сохраняются в базе, соответсвенно необходимо прописать логику, при которой эти данные будут отображаться через базу
+       //  places.append(newPlaceVC.newPlace!)
         // обновление интерфейса
         tableView.reloadData()
     }

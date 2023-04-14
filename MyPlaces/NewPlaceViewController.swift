@@ -10,7 +10,7 @@ import UIKit
 class NewPlaceViewController: UITableViewController {
     
     //создаем новый экземпляр класса для сохранения новых значений
-    var newPlace: Place?
+    //var newPlace = Place()
     
     // флаг загрузки изображения
     var imageIsChanged = false
@@ -23,6 +23,13 @@ class NewPlaceViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /*
+        //загрузка в фоновом потоке объектов из массива
+        DispatchQueue.main.async {
+            self.newPlace.savePlaces()
+        }
+         */
 //убирает строки/линии, где нет контента
         tableView.tableFooterView = UIView()
         
@@ -78,6 +85,9 @@ class NewPlaceViewController: UITableViewController {
     //работа с кнопкой Save, логика кнопки
     func saveNewPlace() {
         
+        
+        
+        
         // если изображение ресторана не изменено пользователем 
         var image: UIImage?
         if imageIsChanged {
@@ -86,11 +96,13 @@ class NewPlaceViewController: UITableViewController {
             image = UIImage(named: "defaultImage")
         }
         
-        newPlace = Place(name: placeName.text!,
-                         location: placeLocation.text,
-                         type: placeType.text,
-                         image: image,
-                         restaurantImage: nil)
+        // конвертация изображения в тип Data
+        let imageData = image?.pngData()
+        
+        let newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, imageData: imageData)
+        
+        // сохранение нового места в базе данных
+        StorageManager.saveObject(newPlace)
     }
 //логика кнопки cancel
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {
