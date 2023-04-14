@@ -18,4 +18,11 @@ class StorageManager {
             realm.add(place)
         }
     }
+    //удаление объектов
+    static func deleteObject(_ place: Place) {
+        try! realm.write {
+            realm.delete(place)
+        }
+    }
 }
+ 

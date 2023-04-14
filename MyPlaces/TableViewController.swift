@@ -75,6 +75,35 @@ class TableViewController: UITableViewController {
    
     
     //MARK: - Table View Delegate
+    
+    //Удаление объекта
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let place = places[indexPath.row]
+            StorageManager.deleteObject(place)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+    
+    /*
+     // Удаление объекта (сторой способ) - более сложный
+    //действия по свайпу справа налево (слева leading)
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        // создадим объект модели, который будем передавать методу deleteObject
+        let place = places[indexPath.row]
+        
+        //удаляем из базы
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
+            StorageManager.deleteObject(place)
+        }
+        
+        //удаляем строку в самом приложение(на экране)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+     */
     /*
          //высота ячейки
    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
