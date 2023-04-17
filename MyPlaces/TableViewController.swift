@@ -86,7 +86,7 @@ class TableViewController: UITableViewController {
     }
     
     /*
-     // Удаление объекта (сторой способ) - более сложный
+     // Удаление объекта (второй способ) - более сложный
     //действия по свайпу справа налево (слева leading)
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
@@ -112,13 +112,25 @@ class TableViewController: UITableViewController {
 */
  
     // MARK: - Navigation
-        /*
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+       
+    // переход на экран редактирования записей
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetail" {
+            //Определяем индекс выбранной ячейки, которую нужно отредактировать
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            //извлекаем объект из массива places
+            let place = places[indexPath.row]
+            
+            //создаем экземпляр класса NewPlaceVC
+            let newPlaceVC = segue.destination as! NewPlaceViewController
+            newPlaceVC.currentPlace = place
+        }
+       
+
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
+  
 
     //  save button activation
     @IBAction func unWingSegue(_ segue: UIStoryboardSegue) {
@@ -126,7 +138,7 @@ class TableViewController: UITableViewController {
         // возврат осуществляется через unwindSegue, source
         guard let newPlaceVC = segue.source as? NewPlaceViewController else { return }
         
-        newPlaceVC.saveNewPlace()
+        newPlaceVC.savePlace()
         
         //Новые объекты сейчас сразу сохраняются в базе, соответсвенно необходимо прописать логику, при которой эти данные будут отображаться через базу
        //  places.append(newPlaceVC.newPlace!)

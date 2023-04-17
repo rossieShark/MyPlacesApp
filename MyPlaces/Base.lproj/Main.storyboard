@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pok-V5-IIl">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -68,6 +69,7 @@
                                     <outlet property="locationLabel" destination="NIJ-9O-zZI" id="4Ed-wd-TEg"/>
                                     <outlet property="nameLabel" destination="Um0-tX-w2L" id="Xc8-gA-knC"/>
                                     <outlet property="typeLabel" destination="Sgt-bE-yjL" id="tBx-ft-XVK"/>
+                                    <segue destination="zb2-v0-XPk" kind="show" identifier="showDetail" id="Cvu-fu-bXe"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -76,7 +78,7 @@
                             <outlet property="delegate" destination="SU3-rL-wqq" id="7L4-li-35a"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="My places" id="EEm-UU-s6b">
+                    <navigationItem key="navigationItem" title="My places" largeTitleDisplayMode="never" id="EEm-UU-s6b">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="OnY-qN-YRp">
                             <connections>
                                 <segue destination="Pkz-b7-08k" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="6dG-Cq-QCb"/>
@@ -233,7 +235,7 @@
                             <outlet property="delegate" destination="zb2-v0-XPk" id="enG-tF-Obp"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="New Place" id="M2V-iQ-8cj">
+                    <navigationItem key="navigationItem" title="New Place" largeTitleDisplayMode="never" id="M2V-iQ-8cj">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="6Xh-hp-KX1">
                             <connections>
                                 <action selector="cancelAction:" destination="zb2-v0-XPk" id="FO2-nA-MYZ"/>
@@ -256,18 +258,18 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YqC-xV-Sa2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="WdK-uX-fAa" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2081.679389312977" y="-196.47887323943664"/>
+            <point key="canvasLocation" x="1370" y="-196"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="NXY-9v-SMi">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Pok-V5-IIl" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="roS-Zf-dVi">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="roS-Zf-dVi">
+                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="Kefa-Regular" family="Kefa" pointSize="26"/>
+                            <fontDescription key="fontDescription" name="MyanmarSangamMN" family="Myanmar Sangam MN" pointSize="25"/>
                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
                         <textAttributes key="largeTitleTextAttributes">
@@ -300,9 +302,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3oc-My-up4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1154.9618320610687" y="-196.47887323943664"/>
+            <point key="canvasLocation" x="1370" y="-979"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Cvu-fu-bXe"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="Photo" width="194.66667175292969" height="195.66667175292969"/>
         <systemColor name="secondarySystemBackgroundColor">
