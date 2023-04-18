@@ -12,7 +12,7 @@ class NewPlaceViewController: UITableViewController {
     //создаем новый экземпляр класса для сохранения новых значений
     //var newPlace = Place()
     //создаем объект для передачи на segue
-    var currentPlace: Place?
+    var currentPlace: Place!
     // флаг загрузки изображения
     var imageIsChanged = false
 
@@ -21,6 +21,7 @@ class NewPlaceViewController: UITableViewController {
     @IBOutlet weak var placeName: UITextField!
     @IBOutlet weak var placeLocation: UITextField!
     @IBOutlet weak var placeType: UITextField!
+    @IBOutlet weak var ratingControl: RatingControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +33,10 @@ class NewPlaceViewController: UITableViewController {
         }
          */
 //убирает строки/линии, где нет контента
-        tableView.tableFooterView = UIView()
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0,
+                                                         y: 0,
+                                                         width: tableView.frame.size.width,
+                                                         height: 1))
         
         // Отключение кнопки Save до заполнения обязательных полей
         saveButton.isEnabled = false
@@ -43,7 +47,7 @@ class NewPlaceViewController: UITableViewController {
         setupEditScreen()
     }
  
-//MARK: Table view delegdte
+//MARK: Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.row == 0 {
@@ -100,7 +104,7 @@ class NewPlaceViewController: UITableViewController {
         // конвертация изображения в тип Data
         let imageData = image?.pngData()
         
-        let newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, imageData: imageData)
+        let newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, imageData: imageData, rating: Double(ratingControl.rating))
         //определяем режим редактирования: добавление новой записи или же анесение изменений
         if currentPlace != nil {
             try! realm.write() {
@@ -108,6 +112,7 @@ class NewPlaceViewController: UITableViewController {
                 currentPlace?.location = newPlace.location
                 currentPlace?.type = newPlace.type
                 currentPlace?.imageData = newPlace.imageData
+                currentPlace?.rating = newPlace.rating
             }
         } else {
             // сохранение нового места в базе данных
@@ -129,6 +134,7 @@ class NewPlaceViewController: UITableViewController {
             placeName.text = currentPlace?.name
             placeLocation.text = currentPlace?.location
             placeType.text = currentPlace?.type
+            ratingControl.rating = Int(currentPlace.rating)
         }
     }
     

@@ -15,6 +15,7 @@
 		542E499C29AD22DA005E9115 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542E499B29AD22DA005E9115 /* CustomTableViewCell.swift */; };
 		542E499E29AD2BC3005E9115 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542E499D29AD2BC3005E9115 /* PlaceModel.swift */; };
 		5454216B29A68A1000EDF943 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5454216A29A68A1000EDF943 /* TableViewController.swift */; };
+		5465B8A929EE84F2005477C7 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5465B8A829EE84F2005477C7 /* RatingControl.swift */; };
 		5478253129E97F5900ACAC01 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5478253029E97F5900ACAC01 /* StorageManager.swift */; };
 		54E33C3F29AE637400ED6BF8 /* NewPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E33C3E29AE637400ED6BF8 /* NewPlaceViewController.swift */; };
 		DA5E077C82A76CD634FAEA64 /* Pods_MyPlaces.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8219E196D38F59E13B1E8973 /* Pods_MyPlaces.framework */; };
@@ -32,6 +33,7 @@
 		542E499B29AD22DA005E9115 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		542E499D29AD2BC3005E9115 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		5454216A29A68A1000EDF943 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		5465B8A829EE84F2005477C7 /* RatingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		5478253029E97F5900ACAC01 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		54E33C3E29AE637400ED6BF8 /* NewPlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlaceViewController.swift; sourceTree = "<group>"; };
 		8219E196D38F59E13B1E8973 /* Pods_MyPlaces.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyPlaces.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,7 +84,6 @@
 				542586F029A66D1C00770DA9 /* AppDelegate.swift */,
 				5454216A29A68A1000EDF943 /* TableViewController.swift */,
 				542586F229A66D1C00770DA9 /* SceneDelegate.swift */,
-				542E499B29AD22DA005E9115 /* CustomTableViewCell.swift */,
 				54E33C3E29AE637400ED6BF8 /* NewPlaceViewController.swift */,
 				542E499D29AD2BC3005E9115 /* PlaceModel.swift */,
 				5478253029E97F5900ACAC01 /* StorageManager.swift */,
@@ -90,6 +91,8 @@
 				542586F929A66D1E00770DA9 /* Assets.xcassets */,
 				542586FB29A66D1E00770DA9 /* LaunchScreen.storyboard */,
 				542586FE29A66D1E00770DA9 /* Info.plist */,
+				542E499B29AD22DA005E9115 /* CustomTableViewCell.swift */,
+				5465B8A829EE84F2005477C7 /* RatingControl.swift */,
 			);
 			path = MyPlaces;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 				54E33C3F29AE637400ED6BF8 /* NewPlaceViewController.swift in Sources */,
 				542E499C29AD22DA005E9115 /* CustomTableViewCell.swift in Sources */,
 				5478253129E97F5900ACAC01 /* StorageManager.swift in Sources */,
+				5465B8A929EE84F2005477C7 /* RatingControl.swift in Sources */,
 				542586F129A66D1C00770DA9 /* AppDelegate.swift in Sources */,
 				542586F329A66D1C00770DA9 /* SceneDelegate.swift in Sources */,
 				5454216B29A68A1000EDF943 /* TableViewController.swift in Sources */,
