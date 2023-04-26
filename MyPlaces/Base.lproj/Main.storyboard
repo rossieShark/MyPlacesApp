@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -31,10 +32,24 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Photo" translatesAutoresizingMaskIntoConstraints="NO" id="NxZ-9b-Vn5">
                                                     <rect key="frame" x="0.0" y="0.0" width="393" height="250"/>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V6l-wc-or5">
+                                                    <rect key="frame" x="323" y="189" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="NUL-DF-wQY"/>
+                                                        <constraint firstAttribute="width" constant="50" id="pw5-ej-4Pb"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="map"/>
+                                                    <connections>
+                                                        <segue destination="8aT-Qo-I7i" kind="presentation" identifier="showMap" modalPresentationStyle="fullScreen" id="hn0-jJ-xcn"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemGray4Color"/>
                                             <constraints>
+                                                <constraint firstItem="V6l-wc-or5" firstAttribute="bottom" secondItem="D3a-f3-hdd" secondAttribute="bottomMargin" id="3D9-67-qXj"/>
                                                 <constraint firstAttribute="trailing" secondItem="NxZ-9b-Vn5" secondAttribute="trailing" id="6Nk-5D-V17"/>
+                                                <constraint firstItem="V6l-wc-or5" firstAttribute="trailing" secondItem="D3a-f3-hdd" secondAttribute="trailingMargin" id="Bwm-I2-PY1"/>
                                                 <constraint firstAttribute="bottom" secondItem="NxZ-9b-Vn5" secondAttribute="bottom" id="QgP-c7-YcH"/>
                                                 <constraint firstItem="NxZ-9b-Vn5" firstAttribute="top" secondItem="D3a-f3-hdd" secondAttribute="top" id="ZQP-Yp-xOL"/>
                                                 <constraint firstItem="NxZ-9b-Vn5" firstAttribute="leading" secondItem="D3a-f3-hdd" secondAttribute="leading" id="aSh-bw-KQX"/>
@@ -201,6 +216,51 @@
                 <exit id="WdK-uX-fAa" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1370" y="-196"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="fem-jc-gjT">
+            <objects>
+                <viewController id="8aT-Qo-I7i" customClass="MapViewController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Dzv-nL-y6B">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iHr-6Y-5hM">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <standardMapConfiguration key="preferredConfiguration"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IeY-Oz-9zN">
+                                <rect key="frame" x="347" y="75" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="Swg-Fh-g1E"/>
+                                    <constraint firstAttribute="height" constant="30" id="fzG-mh-2Uh"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="camcel">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeVC" destination="8aT-Qo-I7i" eventType="touchUpInside" id="RFF-yI-abY"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="RMs-Yh-EGE"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="iHr-6Y-5hM" secondAttribute="bottom" id="5Cm-q8-4wY"/>
+                            <constraint firstItem="IeY-Oz-9zN" firstAttribute="top" secondItem="RMs-Yh-EGE" secondAttribute="top" constant="16" id="ARK-Yq-13O"/>
+                            <constraint firstItem="RMs-Yh-EGE" firstAttribute="trailing" secondItem="IeY-Oz-9zN" secondAttribute="trailing" constant="16" id="FRK-5p-QZN"/>
+                            <constraint firstItem="iHr-6Y-5hM" firstAttribute="leading" secondItem="RMs-Yh-EGE" secondAttribute="leading" id="Ij1-QM-ygr"/>
+                            <constraint firstItem="iHr-6Y-5hM" firstAttribute="top" secondItem="Dzv-nL-y6B" secondAttribute="top" id="NKb-3d-8da"/>
+                            <constraint firstItem="iHr-6Y-5hM" firstAttribute="trailing" secondItem="RMs-Yh-EGE" secondAttribute="trailing" id="whg-qM-KrJ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="iHr-6Y-5hM" id="iON-Cx-vAH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4vZ-4f-gfq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2300" y="-196.47887323943664"/>
         </scene>
         <!--My places-->
         <scene sceneID="PSi-RG-mqR">
@@ -396,7 +456,9 @@
     <resources>
         <image name="AZ" width="25" height="24"/>
         <image name="Photo" width="194.66667175292969" height="195.66667175292969"/>
+        <image name="camcel" width="128" height="128"/>
         <image name="goldStar" width="1024" height="1024"/>
+        <image name="map" width="50" height="50"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

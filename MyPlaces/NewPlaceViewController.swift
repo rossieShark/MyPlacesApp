@@ -16,12 +16,12 @@ class NewPlaceViewController: UITableViewController {
     // флаг загрузки изображения
     var imageIsChanged = false
 
-    @IBOutlet weak var placeImage: UIImageView!
-    @IBOutlet weak var saveButton: UIBarButtonItem!
-    @IBOutlet weak var placeName: UITextField!
-    @IBOutlet weak var placeLocation: UITextField!
-    @IBOutlet weak var placeType: UITextField!
-    @IBOutlet weak var ratingControl: RatingControl!
+    @IBOutlet var placeImage: UIImageView!
+    @IBOutlet var saveButton: UIBarButtonItem!
+    @IBOutlet var placeName: UITextField!
+    @IBOutlet var placeLocation: UITextField!
+    @IBOutlet var placeType: UITextField!
+    @IBOutlet var ratingControl: RatingControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,17 +90,33 @@ class NewPlaceViewController: UITableViewController {
         }
     }
     
+    //MARK: Navigation (переход к MapVC)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier != "showMap" { return }
+        //создаем экземпляр типа MapVC
+        let mapVC = segue.destination as! MapViewController
+        //передаем значения из полей
+        mapVC.place.name = placeName.text!
+        mapVC.place.location = placeLocation.text
+        mapVC.place.type = placeType.text
+        mapVC.place.imageData = placeImage.image?.pngData()
+    
+    }
+    
+    
     //работа с кнопкой Save, логика кнопки
     func savePlace() {
         
-        // если изображение ресторана не изменено пользователем 
+        // если изображение ресторана не изменено пользователем
+        /*
         var image: UIImage?
         if imageIsChanged {
             image = placeImage.image
         } else {
             image = UIImage(named: "defaultImage")
         }
-        
+        */
+        let image = imageIsChanged ? placeImage.image : UIImage(named: "defaultImage")
         // конвертация изображения в тип Data
         let imageData = image?.pngData()
         
