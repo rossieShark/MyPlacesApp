@@ -92,15 +92,24 @@ class NewPlaceViewController: UITableViewController {
     
     //MARK: Navigation (переход к MapVC)
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier != "showMap" { return }
+        
+        //попробуем извлесь идентифаер
+        guard let identifier = segue.identifier,
+                let mapVC = segue.destination as? MapViewController else { return }
+        mapVC.incomeSegueIdentifier = identifier
+        //назначим делегата
+        mapVC.mapViewControllerDelegate = self
+
         //создаем экземпляр типа MapVC
-        let mapVC = segue.destination as! MapViewController
-        //передаем значения из полей
-        mapVC.place.name = placeName.text!
-        mapVC.place.location = placeLocation.text
-        mapVC.place.type = placeType.text
-        mapVC.place.imageData = placeImage.image?.pngData()
-    
+        //let mapVC = segue.destination as! MapViewController
+        if identifier == "showPlace" {
+            //передаем значения из полей
+            mapVC.place.name = placeName.text!
+            mapVC.place.location = placeLocation.text
+            mapVC.place.type = placeType.text
+            mapVC.place.imageData = placeImage.image?.pngData()
+        
+        }
     }
     
     
@@ -223,4 +232,13 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate,  UINavigation
         //закрываем Imagepicker
         dismiss(animated: true)
     }
+}
+
+extension NewPlaceViewController: MapViewControllerDelegate {
+   
+    func getAddress(_ address: String?) {
+        placeLocation.text = address
+    }
+    
+    
 }
